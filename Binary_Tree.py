@@ -40,10 +40,66 @@ class binary_search_tree(object):
             if self.__search(self.root,key):
                 print("\nKey = {} is Present!".format(key))
             else:
-                print("\nKey ={} is Absent!".format(key))
+                print("\nKey = {} is Absent!".format(key))
             return
 
+    def minimum_node_recursion(self):
+        min_value = self.__minimum_node_recursion(self.root)
+        if  min_value is None:
+            print("Tree is Empty")
+        else:
+            print("\nMinimum Value from Recursion: ",min_value)
+
+    def minimum_node_iterative(self):
+        min_value = self.__minimum_node_iterative(self.root)
+        if  min_value is None:
+            print("Tree is Empty")
+        else:
+            print("\nMinimum Value from Iterative Method: ",min_value) 
+    
+    def maximum_node_recursion(self):
+        max_value = self.__maximum_node_recursion(self.root)
+        if max_value is None:
+            print("\nTree is Empty")
+        else:
+            print("Maximum Value from Recursion: ", max_value)
+
+    def maximum_node_iterative(self):
+        max_value = self.__maximum_node_iterative(self.root)
+        if  max_value is None:
+            print("Tree is Empty")
+        else:
+            print("\nMaximun Value from Iterative Method: ",max_value) 
+
     # Private Methods
+
+    def __maximum_node_iterative(self,parent):
+        while parent.has_right_child():
+            parent = parent.get_right_child()
+        return parent.get_value()    
+
+    def __maximum_node_recursion(self,parent):
+        if parent.get_value() is None:
+            return
+        elif parent.has_right_child():
+            return self.__maximum_node_recursion(parent.get_right_child())
+        else:
+            return parent.get_value()    
+
+    def __minimum_node_iterative(self,parent):
+        while parent.has_left_child():
+            
+            parent = parent.get_left_child()
+        return parent.get_value()    
+
+    def __minimum_node_recursion(self,parent):
+        if parent.get_value() is None:
+            return
+        elif parent.has_left_child():
+            return self.__minimum_node_recursion(parent.get_left_child())
+        else:
+            return parent.get_value()    
+
     def __search(self,parent,key):
         if parent.data is None:
             return False
@@ -86,6 +142,7 @@ class binary_search_tree(object):
         pass
 
 
+
 try:
     print("Press Control + C to terminate the program")
     while True:
@@ -96,6 +153,8 @@ try:
             tree.insert(randint(-root_value,root_value))
             count = count - 1
         tree.preorder()
+        tree.minimum_node_iterative()
+        tree.maximum_node_iterative()
         tree.search(int(input("\nEnter the search Element")))
 except KeyboardInterrupt:
     print("\nTerminating the Program")
