@@ -24,7 +24,7 @@ class binary_search_tree(object):
             self.__delete(self.root,key)
             return
 
-    def preorder(self):
+    def display(self):
         if self.root.data is None:
             print("\nTree is Empty")
         else:
@@ -72,7 +72,6 @@ class binary_search_tree(object):
             print("\nMaximun Value from Iterative Method: ",max_value) 
 
     # Private Methods
-
     def __maximum_node_iterative(self,parent):
         while parent.has_right_child():
             parent = parent.get_right_child()
@@ -129,6 +128,7 @@ class binary_search_tree(object):
                     self.__insert(parent.right,key)
         return
 
+
     def __preorder(self,parent):
         if parent is None:
             return
@@ -150,11 +150,12 @@ try:
         tree = binary_search_tree(root_value)
         count = int(input("\nEnter the number of Nodes: "))
         while count:
-            tree.insert(randint(-root_value,root_value))
+            tree.insert(randint(0,2*root_value))
             count = count - 1
-        tree.preorder()
+        
         tree.minimum_node_iterative()
         tree.maximum_node_iterative()
-        tree.search(int(input("\nEnter the search Element")))
+        tree.search(int(input("\nEnter the search Element: ")))
+        tree.display()
 except KeyboardInterrupt:
     print("\nTerminating the Program")
