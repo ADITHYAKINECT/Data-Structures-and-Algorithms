@@ -173,8 +173,7 @@ class binary_search_tree(object):
              1   5 8  10
                 / \
                4   6                   """
-tree_elements = [15,7,9,2,1,5,10,8,20,18,22,4,6]
-# tree_elements = [15,20,7,9]           
+tree_elements = [15,7,9,2,1,5,10,8,20,18,22,4,6]        
 tree = binary_search_tree()
 for element in tree_elements:
     tree.insert(element)
