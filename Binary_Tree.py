@@ -44,11 +44,23 @@ class binary_search_tree(object):
             self.root.data = self.__delete(self.root,key)
         return    
 
+    def count_all_nodes(self):
+        print("Total Number of Nodes in tree {}".format(self.__count_all_nodes(self.root)))    
+
     # Private Methods
-    def __count_leaves(self,parent):
-        if parent is None:
+    def __count_all_nodes(self,parent):
+        if parent is None or parent.get_value() is None:
             return 0
-        elif parent.get_value() is not None and not parent.has_left_child() and not parent.has_right_child():
+        elif parent is not None and not parent.has_left_child() and not parent.has_right_child():
+            return 1
+        else:
+            return self.__count_all_nodes(parent.get_left_child()) + self.__count_all_nodes(parent.get_right_child()) + 1 
+
+
+    def __count_leaves(self,parent):
+        if parent.get_value() is None or parent is None:
+            return 0
+        elif not parent.has_left_child() and not parent.has_right_child():
             return 1
         else:
             return self.__count_leaves(parent.get_left_child()) + self.__count_leaves(parent.get_right_child())
@@ -68,7 +80,6 @@ class binary_search_tree(object):
 
     def __minimum_node_iterative(self,parent):
         while parent.has_left_child():
-            
             parent = parent.get_left_child()
         return parent.get_value()    
 
@@ -163,8 +174,8 @@ class binary_search_tree(object):
              1   5 8  10
                 / \
                4   6                   """
-tree_elements = [15,7,9,2,1,5,10,8,20,18,22,4,6]    
-# tree_elements = [15,20,18,22]           
+tree_elements = [15,7,9,2,1,5,10,8,20,18,22,4,6]
+# tree_elements = [15,20,7,9]           
 tree = binary_search_tree()
 for element in tree_elements:
     tree.insert(element)
@@ -172,4 +183,5 @@ tree.count_leaves()
 tree.display()
 tree.delete(int(input("\nDelete an Element: ")))
 tree.search(int(input("\nEnter the search Element: ")))
+tree.count_all_nodes()
 tree.display()
