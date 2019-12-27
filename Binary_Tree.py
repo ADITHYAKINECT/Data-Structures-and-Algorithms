@@ -56,7 +56,6 @@ class binary_search_tree(object):
         else:
             return self.__count_all_nodes(parent.get_left_child()) + self.__count_all_nodes(parent.get_right_child()) + 1 
 
-
     def __count_leaves(self,parent):
         if parent.get_value() is None or parent is None:
             return 0
