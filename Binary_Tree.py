@@ -16,14 +16,6 @@ class binary_search_tree(object):
             self.__insert(self.root,key)
         return
 
-    def display(self):
-        if self.root.data is None:
-            print("Tree is Empty")
-        else:
-            print("Preorder Traversal:")
-            self.__preorder(self.root)
-        return
-
     def search(self,key):
         if self.root.data is None:
             print("Tree is Empty")
@@ -34,36 +26,28 @@ class binary_search_tree(object):
                 print("\nKey = {} is Absent!".format(key))
         return
 
+    def display(self):
+        if self.root.data is None:
+            print("Tree is Empty")
+        else:
+            print("Preorder Traversal:")
+            self.__preorder(self.root)
+        return    
+
     def count_leaves(self):
         print("Number of Leaves in tree: ",self.__count_leaves(self.root))
+
+    def count_all_nodes(self):
+        print("Total Number of Nodes in tree {}".format(self.__count_all_nodes(self.root))) 
 
     def delete(self,key):
         if self.root.data is None:
             print("Tree is empty")
         else:
             self.root.data = self.__delete(self.root,key)
-        return    
-
-    def count_all_nodes(self):
-        print("Total Number of Nodes in tree {}".format(self.__count_all_nodes(self.root)))    
+        return
 
     # Private Methods
-    def __count_all_nodes(self,parent):
-        if parent is None or parent.get_value() is None:
-            return 0
-        elif parent is not None and not parent.has_left_child() and not parent.has_right_child():
-            return 1
-        else:
-            return self.__count_all_nodes(parent.get_left_child()) + self.__count_all_nodes(parent.get_right_child()) + 1 
-
-    def __count_leaves(self,parent):
-        if parent.get_value() is None or parent is None:
-            return 0
-        elif not parent.has_left_child() and not parent.has_right_child():
-            return 1
-        else:
-            return self.__count_leaves(parent.get_left_child()) + self.__count_leaves(parent.get_right_child())
-
     def __maximum_node_iterative(self,parent):
         while parent.has_right_child():
             parent = parent.get_right_child()
@@ -90,19 +74,6 @@ class binary_search_tree(object):
         else:
             return parent.get_value()    
 
-    def __search(self,parent,key):
-        if parent.data is None:
-            return False
-        elif parent.data == key:
-            return True
-        else:
-            if parent.data > key:
-                if parent.left is not None:
-                    return self.__search(parent.left,key)
-            elif parent.data < key:
-                if parent.right is not None:
-                    return self.__search(parent.right,key)
-
     def __insert(self,parent,key):
         if parent.data is None:
             return
@@ -119,6 +90,19 @@ class binary_search_tree(object):
                     self.__insert(parent.right,key)
         return
 
+    def __search(self,parent,key):
+        if parent.data is None:
+            return False
+        elif parent.data == key:
+            return True
+        else:
+            if parent.data > key:
+                if parent.left is not None:
+                    return self.__search(parent.left,key)
+            elif parent.data < key:
+                if parent.right is not None:
+                    return self.__search(parent.right,key)    
+
     def __preorder(self,parent):
         if parent is None or parent.data is None:
             return
@@ -127,6 +111,22 @@ class binary_search_tree(object):
             print(parent.data,end=" ")
             self.__preorder(parent.get_right_child())
         return
+
+    def __count_leaves(self,parent):
+        if parent.get_value() is None or parent is None:
+            return 0
+        elif not parent.has_left_child() and not parent.has_right_child():
+            return 1
+        else:
+            return self.__count_leaves(parent.get_left_child()) + self.__count_leaves(parent.get_right_child())
+
+    def __count_all_nodes(self,parent):
+        if parent is None or parent.get_value() is None:
+            return 0
+        elif parent is not None and not parent.has_left_child() and not parent.has_right_child():
+            return 1
+        else:
+            return self.__count_all_nodes(parent.get_left_child()) + self.__count_all_nodes(parent.get_right_child()) + 1         
 
     def __delete(self, parent,key):
 
@@ -177,9 +177,9 @@ tree_elements = [15,7,9,2,1,5,10,8,20,18,22,4,6]
 tree = binary_search_tree()
 for element in tree_elements:
     tree.insert(element)
-tree.count_leaves()
-tree.display()
+tree.display()    
 tree.delete(int(input("\nDelete an Element: ")))
 tree.search(int(input("\nEnter the search Element: ")))
+tree.count_leaves()
 tree.count_all_nodes()
 tree.display()
