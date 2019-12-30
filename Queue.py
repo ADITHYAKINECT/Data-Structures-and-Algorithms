@@ -58,9 +58,3 @@ class Queue:
                 position += 1
             print("\n")
         
-q = Queue(5)
-for i in range(6):
-    q.enqueue(i)
-q.display()
-q.dequeue()
-q.display()
