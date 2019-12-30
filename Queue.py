@@ -22,7 +22,6 @@ class Queue:
             else:
                 self.rear +=1
                 self.list[self.rear] = element
-        return
 
     def dequeue(self):
         if self.is_empty():
@@ -32,7 +31,6 @@ class Queue:
                 self.front +=1
             elif self.front == self.rear:
                 self.front = self.rear = -1
-        return
         
     def posterior(self):
         if self.is_empty():
@@ -49,7 +47,6 @@ class Queue:
     def display(self):
         if self.is_empty():
             print("Queue is Empty")
-            return
         else:
             print("Queue is:")
             position = self.front
@@ -57,4 +54,3 @@ class Queue:
                 print(self.list[position],end=" ")
                 position += 1
             print("\n")
-        
