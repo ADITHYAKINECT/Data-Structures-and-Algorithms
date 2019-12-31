@@ -73,10 +73,3 @@ class Queue:
                 print(self.list[position],end=" ")
                 position += 1
             print("\n")
-
-
-Q = Queue(10)
-Q.enqueue(100)
-Q.enqueue(200)
-Q.reverse()
-Q.display()
